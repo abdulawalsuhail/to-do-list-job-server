@@ -1,18 +1,13 @@
-const express = require('express');
 const cors = require('cors');
+const express = require('express');
 require('dotenv').config
 const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 const port = process.env.PORT || 5000
-
 const app = express();
 
 // middleware
 app.use(cors());
 app.use(express.json());
-
-// todojobmy
-// xYzx3YhaAXWN4GC8
-
 
 
 const uri = "mongodb+srv://todojobmy:xYzx3YhaAXWN4GC8@todoapp1.ftflh.mongodb.net/?retryWrites=true&w=majority";
@@ -82,6 +77,7 @@ const run = async () => {
         res.send(result);
       });
   
+
       // get completed task
       app.get("/completedTask/:id", async (req, res) => {
         const email = req.params.id;
@@ -90,15 +86,16 @@ const run = async () => {
         res.send(result);
       });
   
-      // delete a complete task
-      app.delete("/completedTask/:id", async (req, res) => {
+       // delete a complete task
+       app.delete("/completedTask/:id", async (req, res) => {
         const id = req.params.id;
         const query = { _id: ObjectId(id) };
         const result = await taskCollection.deleteOne(query);
         res.send(result);
       });
+     
     } finally {
-      // await client.close(console.dir)
+      
     }
   };
 run().catch(console.dir)
